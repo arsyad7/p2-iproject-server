@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const { encode, decode } = require('../helpers/bcryptjs');
+const fetchGoogleUser = require('../helpers/googleAuth');
 const { sign, verify } = require('../helpers/jwt');
 
 class UserController {
@@ -52,6 +53,35 @@ class UserController {
                     message: "Error invalid username or email or password"
                 }
             }
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async googleLogin(req, res, next) {
+        let idToken = req.body.idToken;
+        let payload = await fetchGoogleUser(idToken);
+        let { email, name } = payload;
+
+        try {
+            let user = await User.findOrCreate({
+                where: {
+                    email
+                },
+                defaults: {
+                    username: name,
+                    email,
+                    password: "12345"
+                }
+            })
+            let access_token = sign({ id: user[0].id, email: user[0].email });
+            req.headers.access_token = access_token;
+            res.status(200).json({ 
+                access_token,
+                username: user[0].username,
+                userId: user[0].id
+            });
+            
         } catch (err) {
             next(err);
         }
