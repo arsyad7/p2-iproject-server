@@ -19,7 +19,7 @@ class ProductController {
                 },
                 headers: {
                     'x-rapidapi-host': 'apidojo-hm-hennes-mauritz-v1.p.rapidapi.com',
-                    'x-rapidapi-key': 'c1db1a4c1amsh50f031aa3320911p12896cjsn8424f927f574'
+                    'x-rapidapi-key': '425bf39203msh0464899b27387afp1be1a6jsnadbac21fb2bc'
                 }
             };
             axios.request(options)
@@ -45,7 +45,7 @@ class ProductController {
                 params: {lang: 'en', productcode: `${code}`, country: 'asia2'},
                 headers: {
                   'x-rapidapi-host': 'apidojo-hm-hennes-mauritz-v1.p.rapidapi.com',
-                  'x-rapidapi-key': 'c1db1a4c1amsh50f031aa3320911p12896cjsn8424f927f574'
+                  'x-rapidapi-key': '425bf39203msh0464899b27387afp1be1a6jsnadbac21fb2bc'
                 }
             };
             axios.request(options)
